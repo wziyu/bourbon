@@ -1,0 +1,35 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.3-node
+
+    steps:
+      - checkout
+
+      # - restore_cache:
+      #     keys:
+      #       - bourbon-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Install Ruby dependencies
+          # command: bundle install --path vendor/bundle
+          command: bundle install
+
+      - run:
+          name: Install SassDoc
+          command: npm install -g sassdoc@2.2.0
+
+      # - save_cache:
+      #     key: bourbon-{{ checksum "Gemfile.lock" }}
+      #     paths:
+      #       - vendor/bundle
+
+      - run:
+          name: Run the tests
+          command: bundle exec rake
+
+      - run:
+          name: Parse SassDoc comments
+          command: sassdoc core/ --parse --verbose --strict
