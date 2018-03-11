@@ -17,9 +17,9 @@ jobs:
           # command: bundle install --path vendor/bundle
           command: bundle install
 
-      - run:
-          name: Install SassDoc
-          command: npm install -g sassdoc@2.2.0
+      # - run:
+      #     name: Install SassDoc
+      #     command: npm install -g sassdoc@2.2.0
 
       # - save_cache:
       #     key: bourbon-{{ checksum "Gemfile.lock" }}
@@ -30,6 +30,6 @@ jobs:
           name: Run the tests
           command: bundle exec rake
 
-      - run:
-          name: Parse SassDoc comments
-          command: sassdoc core/ --parse --verbose --strict
+      # - run:
+      #     name: Parse SassDoc comments
+      #     command: sassdoc core/ --parse --verbose --strict
